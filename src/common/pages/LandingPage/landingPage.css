@@ -1,0 +1,55 @@
+.header-nav {
+  border-bottom: 1.5px dotted var(--primary-color);
+}
+
+.logo {
+  max-width: 4rem;
+}
+
+.input-field {
+  width: 30rem;
+}
+
+.sub-nav {
+  width: fit-content;
+}
+
+.bg-img {
+  width: 98vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin: 1px 0px;
+}
+
+.overlay-text {
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: var(--text-color);
+  position: absolute;
+  bottom: 42vh;
+}
+
+.explore-btn {
+  text-align: center;
+}
+
+.logo-container {
+  flex-basis: 18rem;
+}
+
+.category-img {
+  width: 15rem;
+  height: 13rem;
+  border-radius: 8px;
+}
+
+.footer {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 0.5rem 0rem;
+  text-align: center;
+}

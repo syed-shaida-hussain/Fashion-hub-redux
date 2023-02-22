@@ -1,0 +1,126 @@
+*,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.flex-r {
+  display: flex;
+}
+
+.flex-c {
+  display: flex;
+  flex-direction: column;
+}
+
+.sp-bw {
+  justify-content: space-between;
+}
+
+.sp-ar {
+  justify-content: space-around;
+}
+
+.ctr-vert {
+  align-items: center;
+}
+
+.ctr-hor {
+  justify-content: center;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.ml1 {
+  margin-left: 1rem;
+}
+
+.mr1 {
+  margin-right: 1rem;
+}
+
+.mr-half {
+  margin-right: 0.3rem;
+}
+
+.mt1 {
+  margin-top: 1rem;
+}
+
+.mt-min {
+  margin-top: 4px;
+}
+
+.mt2 {
+  margin-top: 1.6rem;
+}
+
+.mb1 {
+  margin-bottom: 1rem;
+}
+
+.mb-min {
+  margin-bottom: 10px;
+}
+
+.mt-half {
+  margin-top: 0.5rem;
+}
+
+.pb1 {
+  padding-bottom: 1rem;
+}
+
+.p1 {
+  padding: 1rem;
+}
+
+.p-min {
+  padding: 6px;
+}
+
+.icon:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.pr-clr {
+  color: var(--primary-color);
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.active-link {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.u-case {
+  text-transform: uppercase;
+}
+
+.centered {
+  text-align: center;
+}
+
+.ft-md > button {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+.ft-lg {
+  font-size: 1.2rem;
+}
+
+.logout-btn {
+  height: 85vh;
+}
