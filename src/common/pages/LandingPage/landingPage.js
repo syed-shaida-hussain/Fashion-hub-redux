@@ -2,9 +2,6 @@ import './landingPage.css';
 import '../../../style/utils.css';
 import { Button } from '@mui/material';
 import BgImage from '../../../assets/ecom-cover.jpg';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,11 +50,6 @@ const LandingPage = () => {
               </div>
             ))}
           </section>
-          <footer className="footer">
-            <InstagramIcon className="icon mr1" />
-            <TwitterIcon className="icon mr1" />
-            <GitHubIcon className="icon" />
-          </footer>
         </div>
       )}
     </div>

@@ -1,0 +1,18 @@
+.single-product-container {
+  box-shadow: 1px 1px 5px 1px var(--primary-color);
+  width: fit-content;
+  border-radius: 1rem;
+  margin: 1rem auto;
+}
+
+.single-product-img {
+  width: 35vw;
+  height: 70vh;
+  border-radius: 1rem;
+}
+
+.single-cart-img {
+  width: 17vw;
+  height: 34vh;
+  border-radius: 1rem;
+}

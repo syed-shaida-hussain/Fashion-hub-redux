@@ -5,6 +5,7 @@ import { LoginPage } from './common/pages/Authentication/loginPage';
 import { SignupPage } from './common/pages/Authentication/signupPage';
 import { LandingPage } from './common/pages/LandingPage/landingPage';
 import { ProductListingPage } from './common/pages/productListingPage/productListingPage';
+import { SingleProductPage } from './common/pages/singleProductPage/singleProductPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/products" element={<ProductListingPage />} />
+        <Route path={`products/:productId`} element={<SingleProductPage />} />
       </Routes>
     </div>
   );

@@ -7,17 +7,17 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../features/auth/authSlice';
 // import { toast } from 'react-toastify';
-// import { resetUserData } from '../../features/products/productSlice';
+import { resetUserData } from '../../features/products/productSlice';
 
 const Header = () => {
-  //   const { cartItems, wishlistItems } = useSelector((store) => store.products);
+  const { cartItems, wishlistItems } = useSelector((store) => store.products);
   const { authStatus } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const location = useLocation();
 
   const logoutHandler = () => {
     dispatch(logoutUser());
-    // dispatch(resetUserData());
+    dispatch(resetUserData());
     localStorage.removeItem('ENCODED_TOKEN');
     // toast.success('You have been Logged out successfully');
   };
@@ -46,14 +46,14 @@ const Header = () => {
 
       <ul className="flex-r sub-nav sp-bw ctr-vert">
         <NavLink to="/cart" className={({ isActive }) => (isActive ? 'active-link' : ' link ')}>
-          <Badge badgeContent={0} color="success">
+          <Badge badgeContent={cartItems?.length} color="success">
             <ShoppingCartCheckoutOutlinedIcon className="icon" />
           </Badge>
         </NavLink>
         <NavLink
           to="/wishlist"
           className={({ isActive }) => (isActive ? 'active-link ml1' : ' link ml1')}>
-          <Badge badgeContent={0} color="success">
+          <Badge badgeContent={wishlistItems?.length} color="success">
             <FavoriteBorderOutlinedIcon className="icon" />
           </Badge>
         </NavLink>
