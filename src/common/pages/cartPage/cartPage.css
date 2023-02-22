@@ -1,0 +1,16 @@
+.price-modal {
+  position: sticky;
+  top: 1rem;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+}
+
+.hr {
+  border-top: 1px solid var(--primary-color);
+}
+
+.place-order-btn > button {
+  width: 100%;
+}
