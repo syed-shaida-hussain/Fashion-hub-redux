@@ -112,7 +112,7 @@ export const products = [
     cod: false,
     fastDelivery: true,
     rating: 2,
-    category: 'formals',
+    category: 'partywear',
     quantity: 1
   },
   {
