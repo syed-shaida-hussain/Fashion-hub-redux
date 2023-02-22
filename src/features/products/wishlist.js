@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addToCartButtonClicked,
   deleteWishlistButtonClicked,
-  fetchWishlistItems
+  fetchWishlistItems,
+  hideToast,
+  showToast
 } from './productSlice';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-// import { toast } from 'react-toastify';
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -22,12 +23,20 @@ const Wishlist = () => {
 
   const deleteFromWishlistHandler = (product) => {
     dispatch(deleteWishlistButtonClicked(product));
-    // toast.success('Item removed from wishlist successfully');
+    dispatch(
+      showToast({ content: 'Item Deleted from wishlist Successfully', toastType: 'success' })
+    );
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
   };
 
   const addToCartHandler = (product) => {
     dispatch(addToCartButtonClicked(product));
-    // toast.success('Item Added to cart successfully');
+    dispatch(showToast({ content: 'Item Added to Cart Successfully', toastType: 'success' }));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
   };
 
   return (

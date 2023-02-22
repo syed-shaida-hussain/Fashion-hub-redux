@@ -5,8 +5,8 @@ import { registerNewUser } from './authSlice';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-// import { toast } from 'react-toastify';
 import axios from 'axios';
+import { hideToast, showToast } from '../products/productSlice';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,10 @@ const Signup = () => {
       });
       return data;
     } catch (e) {
-      //   toast.error(e.response.data.errors[0]);
+      dispatch(showToast({ content: e.response.data.errors[0], toastType: 'error' }));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 2000);
     }
   };
 
@@ -34,7 +37,11 @@ const Signup = () => {
       localStorage.setItem('ENCODED_TOKEN', data.encodedToken);
       navigate('/products');
     }
-    // toast.success('You account is created successfully');
+    dispatch(showToast({ content: 'Your Account is successfully created!', toastType: 'success' }));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
+
     dispatch(registerNewUser(data.encodedToken));
   };
 

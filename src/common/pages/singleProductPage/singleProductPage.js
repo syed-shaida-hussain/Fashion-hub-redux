@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import {
   addToCartButtonClicked,
-  addToWishlistButtonClicked
+  addToWishlistButtonClicked,
+  hideToast,
+  showToast
 } from '../../../features/products/productSlice';
 import { useNavigate } from 'react-router';
-// import { toast } from 'react-toastify';
 
 const SingleProductPage = () => {
   const dispatch = useDispatch();
@@ -18,17 +19,19 @@ const SingleProductPage = () => {
   const { authStatus } = useSelector((store) => store.auth);
 
   const addToCartHandler = () => {
-    authStatus
-      ? dispatch(addToCartButtonClicked(singleProduct))
-      : // toast.success('Item Added to Cart Successfully')
-        navigate('/login');
+    dispatch(addToCartButtonClicked(singleProduct));
+    dispatch(showToast({ content: 'Item Added to Cart Successfully', toastType: 'success' }));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
   };
 
   const addToWishlistHandler = () => {
-    authStatus
-      ? dispatch(addToWishlistButtonClicked(singleProduct))
-      : // toast.success('Item Added to Wishlist Successfully')
-        navigate('/login');
+    dispatch(addToWishlistButtonClicked(singleProduct));
+    dispatch(showToast({ content: 'Item Added to Wishlist Successfully', toastType: 'success' }));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
   };
 
   return (
@@ -59,7 +62,9 @@ const SingleProductPage = () => {
                   Go to cart
                 </Button>
               ) : (
-                <Button variant="contained" onClick={() => addToCartHandler()}>
+                <Button
+                  variant="contained"
+                  onClick={() => (authStatus ? addToCartHandler() : navigate('/login'))}>
                   Add to cart
                 </Button>
               )}{' '}
@@ -69,7 +74,9 @@ const SingleProductPage = () => {
                 Go to Wishlist
               </Button>
             ) : (
-              <Button variant="outlined" onClick={() => addToWishlistHandler()}>
+              <Button
+                variant="outlined"
+                onClick={() => (authStatus ? addToWishlistHandler() : navigate('/login'))}>
                 Add to Wishlist
               </Button>
             )}

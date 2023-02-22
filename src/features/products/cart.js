@@ -5,11 +5,12 @@ import {
   decrementCartQuantity,
   deleteCartButtonClicked,
   fetchCartItems,
-  incrementCartQuantity
+  hideToast,
+  incrementCartQuantity,
+  showToast
 } from './productSlice';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-// import { toast } from 'react-toastify';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -24,22 +25,34 @@ const Cart = () => {
 
   const removeFromCartHandler = (product) => {
     dispatch(deleteCartButtonClicked(product));
-    // toast.success('Item removed from cart successfully');
+    dispatch(showToast({ content: 'Item Deleted from cart Successfully', toastType: 'success' }));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
   };
 
   const addToWishlistHandler = (product) => {
     dispatch(addToWishlistButtonClicked(product));
-    // toast.success('Item Added to wishlist');
+    dispatch(showToast({ content: 'Item Added to Wishlist Successfully', toastType: 'success' }));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
   };
 
   const decrementCartQuantityHandler = (product) => {
     dispatch(decrementCartQuantity(product));
-    // toast.success('Item quantity updated successfully');
+    dispatch(showToast({ content: 'Item Quantity decreased Successfully', toastType: 'success' }));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
   };
 
   const incrementCartQuantityHandler = (product) => {
     dispatch(incrementCartQuantity(product));
-    // toast.success('Item quantity updated successfully');
+    dispatch(showToast({ content: 'Item Quantity increased Successfully', toastType: 'success' }));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
   };
   return (
     <div>

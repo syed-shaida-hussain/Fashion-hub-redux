@@ -3,23 +3,29 @@ import { Button, TextField, Badge } from '@mui/material';
 import ShoppingCartCheckoutOutlinedIcon from '@mui/icons-material/ShoppingCartCheckoutOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../features/auth/authSlice';
-// import { toast } from 'react-toastify';
-import { resetUserData } from '../../features/products/productSlice';
+import { hideToast, resetUserData, showToast } from '../../features/products/productSlice';
 
 const Header = () => {
   const { cartItems, wishlistItems } = useSelector((store) => store.products);
   const { authStatus } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const logoutHandler = () => {
     dispatch(logoutUser());
     dispatch(resetUserData());
     localStorage.removeItem('ENCODED_TOKEN');
-    // toast.success('You have been Logged out successfully');
+    dispatch(
+      showToast({ content: 'You have been successfully logged out!', toastType: 'success' })
+    );
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 2000);
+    navigate('/login');
   };
 
   return (

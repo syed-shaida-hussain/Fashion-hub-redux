@@ -10,7 +10,12 @@ const initialState = {
   cartItems: [],
   totalCartPrice: 0,
   wishlistItems: [],
-  categories: []
+  categories: [],
+  toastInfo: {
+    isToastOpen: false,
+    toastContent: '',
+    toastType: ''
+  }
 };
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
@@ -156,6 +161,24 @@ const productSlice = createSlice({
     resetUserData: (state) => {
       state.cartItems = [];
       state.wishlistItems = [];
+    },
+    showToast: (state, action) => {
+      const content = action.payload.content;
+      const type = action.payload.toastType;
+      state.toastInfo = {
+        ...state.toastInfo,
+        isToastOpen: !state.isToastOpen,
+        toastContent: content,
+        toastType: type
+      };
+    },
+    hideToast: (state) => {
+      state.toastInfo = {
+        ...state.toastInfo,
+        isToastOpen: false,
+        toastContent: '',
+        toastType: 'success'
+      };
     }
   },
   extraReducers: {
@@ -204,7 +227,9 @@ export const {
   deleteWishlistButtonClicked,
   incrementCartQuantity,
   decrementCartQuantity,
-  resetUserData
+  resetUserData,
+  showToast,
+  hideToast
 } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { loginUser } from './authSlice';
-// import { toast } from 'react-toastify';
+import { hideToast, showToast } from '../products/productSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,10 @@ const Login = () => {
       return data;
     } catch (e) {
       console.log(e.response.data.errors[0]);
-      //   toast.error(e.response.data.errors[0]);
+      dispatch(showToast({ content: e.response.data.errors[0], toastType: 'error' }));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 2000);
     }
   };
 
@@ -31,13 +34,16 @@ const Login = () => {
     const data = await signinServive(user);
     if (data.encodedToken !== undefined) {
       localStorage.setItem('ENCODED_TOKEN', data.encodedToken);
+    }
+    dispatch(showToast({ content: 'You have been logged in successfully!', toastType: 'success' }));
+    setTimeout(() => {
       if (location.state != null) {
         navigate(location.state.from.pathname);
       } else {
         navigate('/products');
       }
-    }
-    // toast.success('Logged in successfully');
+      dispatch(hideToast());
+    }, 1000);
     dispatch(loginUser(data.encodedToken));
   };
   return (
