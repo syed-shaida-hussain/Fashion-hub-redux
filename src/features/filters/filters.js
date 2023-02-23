@@ -6,8 +6,8 @@ import {
   FormGroup,
   FormLabel,
   Radio,
-  RadioGroup
-  // Slider
+  RadioGroup,
+  Slider
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import CloseIcon from '@mui/icons-material/Close';
@@ -18,12 +18,13 @@ import {
   clearAllFilters,
   sortProducts,
   categorizeProducts,
-  filterByRating
+  filterByRating,
+  priceFilter
 } from './filterSlice';
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const { showCodOnly, showFastDeliveryOnly, sortBy, categories, rateBy } = useSelector(
+  const { showCodOnly, showFastDeliveryOnly, sortBy, categories, rateBy, price } = useSelector(
     (store) => store.filters
   );
 
@@ -41,7 +42,16 @@ const Filters = () => {
         </Button>
         <CloseIcon className="icon" onClick={() => dispatch(toggleFilters())} />
       </div>
-      {/* <Slider size="small" defaultValue={500} aria-label="Small" valueLabelDisplay="auto" /> */}
+      <Slider
+        aria-label="Price Range"
+        valueLabelDisplay="auto"
+        step={500}
+        value={price}
+        marks
+        min={1000}
+        max={4000}
+        onChange={(e) => dispatch(priceFilter(e.target.value))}
+      />
       <FormControl>
         <FormLabel id="demo-radio-buttons-group-label">Rating</FormLabel>
         <RadioGroup aria-labelledby="demo-radio-buttons-group-label" name="radio-buttons-group">
@@ -49,8 +59,8 @@ const Filters = () => {
             value="4_STARS_AND_ABOVE"
             control={
               <Radio
-                checked={rateBy && rateBy === '4_STARS_AND_ABOVE'}
-                onChange={() => dispatch(filterByRating('4_STARS_AND_ABOVE'))}
+                checked={rateBy && rateBy === 4}
+                onChange={() => dispatch(filterByRating(4))}
               />
             }
             label="4 stars and above"
@@ -59,8 +69,8 @@ const Filters = () => {
             value="3_STARS_AND_ABOVE"
             control={
               <Radio
-                checked={rateBy && rateBy === '3_STARS_AND_ABOVE'}
-                onChange={() => dispatch(filterByRating('3_STARS_AND_ABOVE'))}
+                checked={rateBy && rateBy === 3}
+                onChange={() => dispatch(filterByRating(3))}
               />
             }
             label="3 stars and above"
@@ -69,8 +79,8 @@ const Filters = () => {
             value="2_STARS_AND_ABOVE"
             control={
               <Radio
-                checked={rateBy && rateBy === '2_STARS_AND_ABOVE'}
-                onChange={() => dispatch(filterByRating('2_STARS_AND_ABOVE'))}
+                checked={rateBy && rateBy === 2}
+                onChange={() => dispatch(filterByRating(2))}
               />
             }
             label="2 stars and above"
@@ -79,8 +89,8 @@ const Filters = () => {
             value="1_STARS_AND_ABOVE"
             control={
               <Radio
-                checked={rateBy && rateBy === '1_STARS_AND_ABOVE'}
-                onChange={() => dispatch(filterByRating('1_STARS_AND_ABOVE'))}
+                checked={rateBy && rateBy === 1}
+                onChange={() => dispatch(filterByRating(1))}
               />
             }
             label="1 stars and above"

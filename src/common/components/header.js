@@ -7,10 +7,13 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../features/auth/authSlice';
 import { hideToast, resetUserData, showToast } from '../../features/products/productSlice';
+import { searchFilter } from '../../features/filters/filterSlice';
 
 const Header = () => {
   const { cartItems, wishlistItems } = useSelector((store) => store.products);
   const { authStatus } = useSelector((store) => store.auth);
+  const { searchQuery } = useSelector((store) => store.filters);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -47,6 +50,8 @@ const Header = () => {
           className="input-field"
           label="Search products...."
           variant="outlined"
+          value={searchQuery}
+          onChange={(e) => dispatch(searchFilter(e.target.value))}
         />
       )}
 

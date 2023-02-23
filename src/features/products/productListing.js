@@ -4,26 +4,32 @@ import { fetchProducts, fetchSingleProduct } from './productSlice';
 import '../../style/utils.css';
 import Rating from '@mui/material/Rating';
 import { useNavigate } from 'react-router';
-import { getFilteredData } from '../../utils/filterData';
-import { getSortedData } from '../../utils/sortData';
+import { getProductsInPriceRange } from '../../utils/getPriceFilteredData';
+import { getCategorisedData } from '../../utils/getCategorisedData';
+import { getRatedData } from '../../utils/getRatedData';
+import { getSortedData } from '../../utils/getSortedData';
+import { getSearchedData } from '../../utils/getSearchedData';
 
 const ProductListing = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { status, products } = useSelector((store) => store.products);
-  const { showCodOnly, showFastDeliveryOnly, sortBy, categories, rateBy } = useSelector(
-    (store) => store.filters
-  );
+  const { showCodOnly, showFastDeliveryOnly, sortBy, categories, rateBy, searchQuery, price } =
+    useSelector((store) => store.filters);
 
-  const getAllFilteredData = (sortedList, filteredList, { showCodOnly, showFastDeliveryOnly }) => {
-    return filteredList
+  const searchedProducts = getSearchedData(products, searchQuery);
+  const productsInPriceRange = getProductsInPriceRange(searchedProducts, price);
+  const categorisedProducts = getCategorisedData(productsInPriceRange, categories);
+  const ratedProducts = getRatedData(categorisedProducts, rateBy);
+  const sortedProducts = getSortedData(ratedProducts, sortBy);
+
+  const getAllFilteredData = (products, { showCodOnly, showFastDeliveryOnly }) => {
+    return products
       .filter(({ cod }) => (showCodOnly ? cod : true))
       .filter(({ fastDelivery }) => (showFastDeliveryOnly ? fastDelivery : true));
   };
 
-  const sortedData = getSortedData(products, sortBy);
-  const filters = getFilteredData(sortedData, rateBy, categories);
-  const filteredData = getAllFilteredData(sortedData, filters, {
+  const filteredData = getAllFilteredData(sortedProducts, {
     showCodOnly,
     showFastDeliveryOnly
   });
